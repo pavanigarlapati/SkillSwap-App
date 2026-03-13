@@ -23,5 +23,32 @@ router.post("/register", async (req, res) => {
     });
   }
 });
+// Login user
+router.post("/login", async (req, res) => {
+  try {
 
+    const { email, password } = req.body;
+
+    // find user in database
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return res.json({ message: "User not found" });
+    }
+
+    if (user.password !== password) {
+      return res.json({ message: "Incorrect password" });
+    }
+
+    res.json({
+      message: "Login successful",
+      user: user
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+});
 module.exports = router;          

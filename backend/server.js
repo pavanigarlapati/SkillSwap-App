@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const userRoutes = require("./routes/userRoutes");
-
+const skillRoutes = require("./routes/skillRoutes");
 const app = express();
 
 app.use(cors());
@@ -18,7 +18,7 @@ app.get("/", (req,res)=>{
 });
 
 app.use("/api/users", userRoutes);
-
+app.use("/api/skills",skillRoutes);
 app.listen(5000, ()=>{
   console.log("Server running on port 5000");
 });
